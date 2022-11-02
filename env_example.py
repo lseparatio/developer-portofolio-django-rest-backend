@@ -25,3 +25,11 @@ os.environ.setdefault('STRIPE_PUBLIC_KEY' , 'provided by stripe')
 os.environ.setdefault('STRIPE_SECRET_KEY' , 'provided by stripe')
 os.environ.setdefault('STRIPE_CURRENCY' , 'GBP')
 os.environ.setdefault('STRIPE_WH_SECRET' , 'Provided by stripe')
+
+# Database Settings on Local Host
+
+os.environ.setdefault('DB_NAME' , 'database name')
+os.environ.setdefault('DB_USER' , 'database user')
+os.environ.setdefault('DB_PASSWORD' , 'database password')
+os.environ.setdefault('DB_HOST' , 'localhost')
+os.environ.setdefault('DB_PORT' , 'database port')
