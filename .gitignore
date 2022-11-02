@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 dev-portofolio-venv
+env.py
 
 # C extensions
 *.so
