@@ -6,11 +6,12 @@ from django.dispatch import receiver
 from django_countries.fields import CountryField
 
 
-class UserProfile(models.Model):
+class Profile(models.Model):
     """
     A user extended profile model 
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
     birth_date = models.DateField(null=True, blank=True)
     phone_number = models.CharField(max_length=20, null=True, blank=True)
     street_address1 = models.CharField(max_length=80, null=True, blank=True)
@@ -19,6 +20,9 @@ class UserProfile(models.Model):
     county = models.CharField(max_length=80, null=True, blank=True)
     postcode = models.CharField(max_length=20, null=True, blank=True)
     country = CountryField(blank_label='Country', null=True, blank=True)
+
+    class Meta:
+        ordering = ['-created_at']
 
     def __str__(self):
         return self.user.username
@@ -30,6 +34,6 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
     Create or update the user profile
     """
     if created:
-        UserProfile.objects.create(user=instance)
+        Profile.objects.create(user=instance)
     # Existing users: just save the profile
-    instance.userprofile.save()
+    instance.profile.save()

@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Profile
 from .serializers import ProfileSerializer
-from developer_portofolio_backend.permissions import IsOwnerOrReadOnly
+from developer_portofolio_backend.permissions import IsUserOrReadOnly
 
 
 class ProfileList(APIView):
@@ -22,7 +22,7 @@ class ProfileList(APIView):
 
 class ProfileDetail(APIView):
     serializer_class = ProfileSerializer
-    permission_classes = [IsOwnerOrReadOnly]
+    permission_classes = [IsUserOrReadOnly]
 
     def get_object(self, pk):
         try:

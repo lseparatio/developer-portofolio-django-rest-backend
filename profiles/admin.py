@@ -1,9 +1,11 @@
 from django.contrib import admin
-from .models import UserProfile
+from .models import Profile
 
 
-class UserProfileAdmin(admin.ModelAdmin):
+class ProfileAdmin(admin.ModelAdmin):
     list_display = (
+        'id',
+        'created_at',
         'birth_date',
         'phone_number',
         'street_address1',
@@ -11,7 +13,7 @@ class UserProfileAdmin(admin.ModelAdmin):
         'town_or_city',
         'county',
         'postcode',
-        'country'
+        'country',
     )
 
-admin.site.register(UserProfile, UserProfileAdmin)
+admin.site.register(Profile, ProfileAdmin)
