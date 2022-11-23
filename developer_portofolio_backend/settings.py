@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     # ... include the providers you want to enable for social login:
-    
+
 ]
 
 RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_PUBLIC_KEY')
@@ -64,7 +64,7 @@ STRIPE_WH_SECRET = os.environ.get('STRIPE_WH_SECRET')
 
 SITE_ID = 1
 
-AUTHENTICATION_BACKENDS = [    
+AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
 
@@ -139,7 +139,7 @@ else:
             'HOST': os.environ.get('DB_HOST'),
             'PORT': os.environ.get('DB_PORT'),
         }
-}
+    }
 
 
 # Password validation

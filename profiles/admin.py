@@ -16,4 +16,5 @@ class ProfileAdmin(admin.ModelAdmin):
         'country',
     )
 
+
 admin.site.register(Profile, ProfileAdmin)

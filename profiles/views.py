@@ -12,6 +12,7 @@ class ProfileList(APIView):
     List all profiles
     No Create view (post method), as profile creation handled by django signals
     """
+
     def get(self, request):
         profiles = Profile.objects.all()
         serializer = ProfileSerializer(
