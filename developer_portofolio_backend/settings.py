@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'captcha',
     # Apps created by me:
     'profiles',
+    'projects',
     # Allauth apps
     'allauth',
     'allauth.account',
