@@ -24,7 +24,7 @@ urlpatterns = [
     # All-Auth Url's
     path('accounts/', include('allauth.urls')),
     # Profiles Url's
-    path('', include('profiles.urls')),
+    path('api/', include('profiles.urls')),
     # Projects Url's
-    path('projects/', include('projects.urls'))
+    path('api/', include('projects.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
