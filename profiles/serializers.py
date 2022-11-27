@@ -15,5 +15,5 @@ class ProfileSerializer(CountryFieldMixin, serializers.ModelSerializer):
         model = Profile
         fields = [
             'id', 'user', 'birth_date', 'phone_number', 'street_address1',
-            'street_address2', 'town_or_city', 'county', 'postcode', 'country', 'is_user'
+            'street_address2', 'town_or_city', 'county', 'postcode', 'country', 'is_user', 'image',
         ]
