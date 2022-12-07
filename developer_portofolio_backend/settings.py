@@ -57,6 +57,8 @@ else:
         'http://127.0.0.1:8000',
     ]
 
+CSRF_TRUSTED_ORIGINS = [os.environ.get('CLIENT_ORIGIN')]
+
 CORS_ALLOW_CREDENTIALS = True
 
 # Application definition
