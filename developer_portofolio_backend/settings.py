@@ -35,6 +35,10 @@ REST_AUTH_SERIALIZERS = {
     'USER_DETAILS_SERIALIZER': 'developer_portofolio_backend.serializers.CurrentUserSerializer'
 }
 
+REST_AUTH_REGISTER_SERIALIZERS = {
+    'REGISTER_SERIALIZER': 'developer_portofolio_backend.serializers.RegisterSerializer',
+}
+
 
 # Secret key moved in env for security!
 SECRET_KEY = os.environ.get('SECRET_KEY')
