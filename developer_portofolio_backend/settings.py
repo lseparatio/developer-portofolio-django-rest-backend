@@ -85,6 +85,7 @@ INSTALLED_APPS = [
     # Apps created by me:
     'profiles',
     'projects',
+    'contact',
     # Allauth apps
     'allauth',
     'allauth.account',
