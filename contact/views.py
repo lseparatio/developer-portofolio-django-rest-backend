@@ -6,10 +6,12 @@ from rest_framework.response import Response
 from .models import Contact
 from .serializers import ContactSerializer
 from developer_portofolio_backend.permissions import IsUserOrReadOnly
+from django.conf import settings
+from django.template.loader import render_to_string
 from django.core.mail import send_mail
 # To do:
 #  1, To allow get method only for admins
-#  2, To actualy send custom  html mails
+#  2, Mail templates added, left to build nice email templates.
 
 
 class ContactList(generics.ListCreateAPIView):
@@ -20,27 +22,44 @@ class ContactList(generics.ListCreateAPIView):
         name = serializer.validated_data['full_name']
         email = serializer.validated_data['email']
         sent_message = serializer.validated_data['sent_message']
-        send_message(name, email, sent_message)
-        send_confirmation(name, email, sent_message)
+        send_contact_email_to_us(name, email, sent_message)
+        send_contact_confirmation_email(name, email, sent_message)
+        send_contact_confirmation_email(name, email, sent_message)
 
         serializer.save()
 
 
-def send_message(name, email, sent_message):
+def send_contact_email_to_us(name, email, sent_message):
+    """Send the content of contact form submision to admin"""
+    cust_email = email
+    subject = render_to_string(
+        'contact/confirmation_emails/send_contact_email_to_us_subject.txt',
+        {'name': name})
+    body = render_to_string(
+        'contact/confirmation_emails/send_contact_email_to_us_body.html',
+        {'name': name, 'email': email, 'sent_message': sent_message, 'contact_email': settings.DEFAULT_FROM_EMAIL})
+
     send_mail(
-        email,
-        sent_message,
-        'contact@ionutzapototchi.com',
-        ['test@ionutzapototchi.com'],
-        fail_silently=False,
+        subject,
+        body,
+        settings.DEFAULT_FROM_EMAIL,
+        [settings.DEFAULT_FROM_EMAIL]
     )
 
 
-def send_confirmation(name, email, sent_message):
+def send_contact_confirmation_email(name, email, sent_message):
+    """Send the user contact form submision a confirmation email"""
+    cust_email = email
+    subject = render_to_string(
+        'contact/confirmation_emails/send_contact_confirmation_email_subject.txt',
+        {'name': name})
+    body = render_to_string(
+        'contact/confirmation_emails/send_contact_confirmation_email_body.html',
+        {'name': name, 'email': email, 'sent_message': sent_message, 'contact_email': settings.DEFAULT_FROM_EMAIL})
+
     send_mail(
-        'We got your message',
-        'We got your message and we will reply soon',
-        'contact@ionutzapototchi.com',
-        [email],
-        fail_silently=False,
+        subject,
+        body,
+        settings.DEFAULT_FROM_EMAIL,
+        [cust_email]
     )
