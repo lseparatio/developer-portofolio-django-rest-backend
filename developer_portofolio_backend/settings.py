@@ -55,7 +55,8 @@ ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOSTS')]
 
 if 'CLIENT_ORIGIN' in os.environ:
     CORS_ALLOWED_ORIGINS = [
-        os.environ.get('CLIENT_ORIGIN')
+        os.environ.get('CLIENT_ORIGIN'),
+        'http://172.18.180.97:3000',
     ]
 else:
     CORS_ALLOWED_ORIGIN = [
@@ -172,8 +173,20 @@ if os.environ.get('DEVELOPMENT') == 'True':
         }
     }
 
-else:
+elif os.environ.get('MYSQL') == 'True':
 
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': os.environ.get('DB_NAME'),
+            'USER': os.environ.get('DB_USER'),
+            'PASSWORD': os.environ.get('DB_PASSWORD'),
+            'HOST': os.environ.get('DB_HOST'),
+            'PORT': os.environ.get('DB_PORT'),
+        }
+    }
+
+else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -185,9 +198,9 @@ else:
         }
     }
 
-
 if os.environ.get('DEVELOPMENT') == 'True':
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 else:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
