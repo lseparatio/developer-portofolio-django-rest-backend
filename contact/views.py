@@ -1,3 +1,4 @@
+from rest_framework.permissions import IsAdminUser
 from django.http import Http404
 from rest_framework import status
 from rest_framework import generics
@@ -14,17 +15,36 @@ from django.core.mail import send_mail
 #  1, To allow get method only for admins
 
 
-class ContactList(generics.ListCreateAPIView):
+#       send_contact_email_to_us(name, email, sent_message)
+#       send_contact_confirmation_email(name, email, sent_message)
+
+class ContactMessages(APIView):
     serializer_class = ContactSerializer
+    permission_classes = [IsAdminUser]
+
+    def get(self, request):
+        contact = Contact.objects.all()
+        serializer = ContactSerializer(
+            contact,    many=True, context={'request': request}
+        )
+        return Response(serializer.data)
+
+
+class ContactDetail(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = ContactSerializer
+    permission_classes = [IsAdminUser]
     queryset = Contact.objects.all()
 
-    def perform_create(self, serializer):
-        name = serializer.validated_data['full_name']
-        email = serializer.validated_data['email']
-        sent_message = serializer.validated_data['sent_message']
-        serializer.save()
-        send_contact_email_to_us(name, email, sent_message)
-        send_contact_confirmation_email(name, email, sent_message)
+
+class ContactForm(APIView):
+    def post(self, request):
+        serializer = ContactSerializer(
+            data=request.data, context={'request': request}
+        )
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 def send_contact_email_to_us(name, email, sent_message):
