@@ -11,6 +11,7 @@ from django.conf import settings
 from django.template.loader import render_to_string
 from django.core.mail import EmailMultiAlternatives
 from django.core.mail import send_mail
+import asyncio
 # To do:
 #  1, To allow get method only for admins
 
@@ -42,12 +43,21 @@ class ContactForm(APIView):
             data=request.data, context={'request': request}
         )
         if serializer.is_valid():
+            name = serializer.validated_data['full_name']
+            email = serializer.validated_data['email']
+            sent_message = serializer.validated_data['sent_message']
             serializer.save()
+            send_contact_email_to_us1 = send_contact_email_to_us(
+                name, email, sent_message)
+            send_contact_confirmation_email1 = send_contact_confirmation_email(
+                name, email, sent_message)
+            asyncio.run(send_contact_email_to_us1)
+            asyncio.run(send_contact_confirmation_email1)
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-def send_contact_email_to_us(name, email, sent_message):
+async def send_contact_email_to_us(name, email, sent_message):
     """Send the content of contact form submision to admin"""
     email = email
     subject = render_to_string(
@@ -67,7 +77,7 @@ def send_contact_email_to_us(name, email, sent_message):
     message.send(fail_silently=False)
 
 
-def send_contact_confirmation_email(name, email, sent_message):
+async def send_contact_confirmation_email(name, email, sent_message):
     """Send the user contact form submision a confirmation email"""
     cust_email = email
     subject = render_to_string(
