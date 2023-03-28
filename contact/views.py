@@ -12,12 +12,9 @@ from django.template.loader import render_to_string
 from django.core.mail import EmailMultiAlternatives
 from django.core.mail import send_mail
 import asyncio
-# To do:
-#  1, To allow get method only for admins
 
-
-#       send_contact_email_to_us(name, email, sent_message)
-#       send_contact_confirmation_email(name, email, sent_message)
+# To Do
+# Try to do the response of ContactForm faster as is arround 1second now
 
 class ContactMessages(APIView):
     serializer_class = ContactSerializer
