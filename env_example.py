@@ -7,6 +7,9 @@ os.environ.setdefault('DATABASE_URL', 'postgres url')
 os.environ.setdefault('ALLOWED_HOSTS', '127.0.0.1')
 os.environ.setdefault('CLIENT_ORIGIN', 'add api client origin with https')
 
+# Front End Url:
+os.environ.setdefault('FRONT_END_URL', 'https://example.com/') 
+
 # Rechapcha keys: https://www.google.com/recaptcha/
 
 os.environ.setdefault('RECAPTCHA_PUBLIC_KEY', 'your rechapcha key')

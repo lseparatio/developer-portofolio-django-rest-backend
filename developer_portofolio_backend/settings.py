@@ -2,6 +2,7 @@ from distutils.debug import DEBUG
 from pathlib import Path
 import os
 import dj_database_url
+import importlib
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,6 +32,7 @@ JWT_AUTH_COOKIE = 'my-app-auth'
 JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
 JWT_AUTH_SAMESITE = 'None'
 OLD_PASSWORD_FIELD_ENABLED = True
+ACCOUNT_ADAPTER = 'adapter.DefaultAccountAdapterCustom'
 
 REST_AUTH_SERIALIZERS = {
     'USER_DETAILS_SERIALIZER': 'developer_portofolio_backend.serializers.CurrentUserSerializer'
@@ -64,8 +66,11 @@ else:
     ]
 
 CSRF_TRUSTED_ORIGINS = [os.environ.get('CLIENT_ORIGIN')]
+CSRF_COOKIE_DOMAIN = '.ionutzapototchi.com'
 
 CORS_ALLOW_CREDENTIALS = True
+
+FRONT_END_URL = os.environ.get('FRONT_END_URL')
 
 # Application definition
 
@@ -119,6 +124,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = True
 ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
 ACCOUNT_USERNAME_MIN_LENGTH = 4
+ACCOUNT_UNIQUE_EMAIL = True
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/accounts/'
 
