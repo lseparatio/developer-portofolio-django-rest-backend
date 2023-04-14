@@ -11,7 +11,8 @@ class Projects(models.Model):
         max_length=254, default='Please provide a project title')
     project_description = models.CharField(
         max_length=500, default='Please provide a project description')
-    project_image = models.ImageField(blank=True, null=True)
+    project_image = models.ImageField(
+        upload_to='images/', default='../media/img-commig-soon.webp')
     project_icon = models.ImageField(blank=True, null=True)
     project_live_link = models.URLField(max_length=265, null=True, blank=True)
     project_github_link = models.URLField(
