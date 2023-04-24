@@ -14,7 +14,7 @@ class ProjectSerializer(serializers.ModelSerializer):
         model = Projects
         fields = [
             'id', 'user', 'project_name', 'project_description', 'project_image', 'project_icon',
-            'project_github_link', 'project_start_date', 'project_end_date', 'html', 'css', 'bootstrap', 'javascript',
-            'python', 'flask', 'django', 'sql', 'mongodb', 'postgres', 'deployment_required', 'shared_hosting', 'vps', 'email_server_setup',
+            'project_github_link', 'project_start_date', 'project_end_date', 'html', 'css', 'bootstrap', 'materialize', 'javascript',
+            'python', 'flask', 'django', 'reactJS', 'use_database', 'sql', 'mongodb', 'postgres', 'deployment_required', 'is_deployed', 'shared_hosting', 'heroku', 'aws', 'vps', 'email_server_setup',
             'is_user',
         ]
