@@ -9,6 +9,7 @@ class ProjectsAdmin(admin.ModelAdmin):
         'project_description',
         'project_image',
         'project_icon',
+        'project_live_link',
         'project_github_link',
         'project_start_date',
         'project_end_date',
