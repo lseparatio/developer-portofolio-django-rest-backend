@@ -39,6 +39,8 @@ class Projects(models.Model):
     aws = models.BooleanField(default=False)
     vps = models.BooleanField(default=False)
     email_server_setup = models.BooleanField(default=False)
+    stripe = models.BooleanField(default=False)
+    paypal = models.BooleanField(default=False)
 
     def __str__(self):
         return self.project_name

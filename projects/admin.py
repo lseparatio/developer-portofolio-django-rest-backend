@@ -33,6 +33,8 @@ class ProjectsAdmin(admin.ModelAdmin):
         'aws',
         'vps',
         'email_server_setup',
+        'stripe',
+        'paypal',
     )
 
 
