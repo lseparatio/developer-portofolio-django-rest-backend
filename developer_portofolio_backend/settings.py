@@ -1,4 +1,4 @@
-from distutils.debug import DEBUG
+#from distutils.debug import DEBUG
 from pathlib import Path
 import os
 import dj_database_url
@@ -137,6 +137,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware'
 ]
 
 ROOT_URLCONF = 'developer_portofolio_backend.urls'
